@@ -197,6 +197,6 @@ Review all decisions made during the session and ensure `phase-3-design-decision
 
 ---
 
-## Next
+## Next Stage
 
 Proceed to **Stage 3-2: Core App Views** — apply the design direction to the core app views identified in the view inventory.

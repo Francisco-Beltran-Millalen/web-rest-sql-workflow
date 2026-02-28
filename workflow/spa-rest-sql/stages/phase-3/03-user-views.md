@@ -81,6 +81,6 @@ Document any revisions or new patterns in `phase-3-design-decisions.md`.
 
 ---
 
-## Next
+## Next Stage
 
 Proceed to **Stage 3-4: Auth Views** — style the authentication views (standalone pages, no app shell).

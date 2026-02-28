@@ -7,6 +7,8 @@ Export the current conversation to a log file in `docs/logs/`.
 - Stage identifier:
   - `0` for meta-workflow
   - `d` for diagram-assistant
+  - `i` for import-artifact
+  - `t` for knowledge-tester
   - `<phase>-<stage>` for regular stages (e.g., `2-1` for Phase 2 Stage 1)
 
 ## Process

@@ -2,6 +2,75 @@
 
 ---
 
+## 2026-02-28: Audit 3 fixes — Stage T header case, Stage 4-1 next stage, Stage 3-4 EXCLUDE note
+
+**Problem:** Three issues found during a full workflow audit:
+1. `03-knowledge-tester.md` header said `# Stage t:` (lowercase) — all other on-demand stages use uppercase (`# Stage D:`, `# Stage I:`); AGENTS.md table also uses `| T |`.
+2. `01-project-setup.md` "Next Stage" section only mentioned Stage 4-2 (Implementation Loop), omitting Stage 4-3 (Learning Guide) as an alternative. AGENTS.md clearly states they are alternatives chosen per use case.
+3. `04-auth-views.md` Part 1 was missing the "IMPORTANT: If a view is marked EXCLUDE, skip it" note that appears in the equivalent Part 1 of Stage 3-2 and Stage 3-3.
+
+**Cause:** Item 1 was a copy-paste oversight when Stage T was authored. Item 2 was an omission when Stage 4-1 was written — the "Next Stage" pointed only to 4-2. Item 3 was an inconsistency introduced when Stage 3-4 was authored.
+
+**Fix:**
+- `03-knowledge-tester.md`: Changed `# Stage t:` → `# Stage T:`
+- `01-project-setup.md`: Replaced single-stage "Next Stage" with both alternatives (4-2 and 4-3), noting they are chosen per use case and share the persistence document
+- `04-auth-views.md`: Added EXCLUDE note to Part 1 to match Stage 3-2 and 3-3
+
+**Files:**
+- `workflow/spa-rest-sql/stages/phase-0/03-knowledge-tester.md`
+- `workflow/spa-rest-sql/stages/phase-4/01-project-setup.md`
+- `workflow/spa-rest-sql/stages/phase-3/04-auth-views.md`
+
+---
+
+## 2026-02-28: Audit 2 fixes — Phase 4-1 step numbering, missing `/start-stage t`, Phase 4 count, Phase 3 `## Next` header
+
+**Problem:** Four issues found during a full workflow audit:
+1. `01-project-setup.md` Part 2 step numbering jumped from 3 to 5 (no step 4), then 6 — copy-paste error.
+2. `AGENTS.md` Quick Commands section listed `/start-stage 0`, `d`, `i` but omitted `/start-stage t` (Knowledge Tester), which was added in a prior session.
+3. `AGENTS.md` Phase 4 overview description said "(2 stages, one loops)" — there are 3 stages (4-1, 4-2, 4-3).
+4. Phase 3 stage files (3-1, 3-2, 3-3, 3-4) used `## Next` as the section header; all Phase 1 and 2 stages use `## Next Stage`.
+
+**Cause:** Items 1, 2, 3 were editing/copy-paste oversights. Item 4 was inconsistency introduced when Phase 3 stages were authored.
+
+**Fix:**
+- `01-project-setup.md`: Renumbered Part 2 steps: 5→4, 6→5
+- `AGENTS.md`: Added `/start-stage t` to Quick Commands; fixed Phase 4 count to "(3 stages: setup + alternating implementation loop)"
+- Phase 3 stage files: Changed `## Next` → `## Next Stage` in 3-1, 3-2, 3-3, 3-4
+
+**Files:**
+- `workflow/spa-rest-sql/stages/phase-4/01-project-setup.md`
+- `AGENTS.md`
+- `workflow/spa-rest-sql/stages/phase-3/01-visual-design.md`
+- `workflow/spa-rest-sql/stages/phase-3/02-core-app-views.md`
+- `workflow/spa-rest-sql/stages/phase-3/03-user-views.md`
+- `workflow/spa-rest-sql/stages/phase-3/04-auth-views.md`
+
+---
+
+## 2026-02-28: Audit fixes — Knowledge Tester registration and Arguments docs
+
+**Problem:** Three issues found during a Stage 0 audit of the v1.1 changes:
+1. `03-knowledge-tester.md` used `/export-log 0` in its Logging section, which would produce a `stage-00-meta-workflow-*.txt` filename instead of the correct `stage-0t-knowledge-tester-*.txt`.
+2. `AGENTS.md` On-Demand Stages table and description omitted Stage T (Knowledge Tester).
+3. Both `start-stage/SKILL.md` and `export-log/SKILL.md` Arguments sections listed `0` and `d` but not `i` and `t`.
+
+**Cause:** Items 2 and 3 were oversights during the v1.1 session that created Stage T. Item 1 was a copy-paste error from the Stage 0 template.
+
+**Fix:**
+- `03-knowledge-tester.md`: Changed `/export-log 0` → `/export-log t`; removed the now-incorrect parenthetical note
+- `AGENTS.md`: Added Stage T row to On-Demand Stages table; added Stage T bullet to the description
+- `start-stage/SKILL.md`: Added `i` and `t` to the Arguments identifier list
+- `export-log/SKILL.md`: Added `i` and `t` to the Arguments identifier list
+
+**Files:**
+- `workflow/spa-rest-sql/stages/phase-0/03-knowledge-tester.md`
+- `AGENTS.md`
+- `.agent-utils/skills/start-stage/SKILL.md`
+- `.agent-utils/skills/export-log/SKILL.md`
+
+---
+
 ## 2026-02-27: SPA+JWT specialization — rename web-rest-sql to spa-rest-sql
 
 **Problem:** The workflow supported multiple frontend approaches (SPA, server-rendered, hybrid/HTMX) with conditional branches throughout every phase-4 stage. In practice, every project run used SPA+JWT. The server-rendered paths added noise, conditional complexity, and confusion.

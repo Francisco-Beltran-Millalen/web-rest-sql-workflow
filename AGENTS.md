@@ -9,7 +9,7 @@ The workflow has **four phases**:
 1. **Phase 1: Discovery + Tech Selection** (6 stages) — Understand what to build and pick the stack
 2. **Phase 2: Sketching & Data Modeling** (4 stages) — Design entities, data, endpoints, and UI sketches
 3. **Phase 3: UI Polish** (5 stages) — Style the views
-4. **Phase 4: Prototype Implementation** (2 stages, one loops) — Build it, use case by use case
+4. **Phase 4: Prototype Implementation** (3 stages: setup + alternating implementation loop) — Build it, use case by use case
 
 **This workflow produces a working prototype.** A separate "Correctness Workflow" (future) takes the prototype to production quality.
 
@@ -53,11 +53,13 @@ Examples:
 | 0 | `workflow/spa-rest-sql/stages/phase-0/00-meta-workflow.md` | Workflow Engineer | `workflow-changelog.md` |
 | D | `workflow/spa-rest-sql/stages/phase-0/01-diagram-assistant.md` | Visual Communicator | `assets/diagrams/*.md` |
 | I | `workflow/spa-rest-sql/stages/phase-0/02-import-artifact.md` | Artifact Importer | `imported-artifacts/*-imported.md` |
+| T | `workflow/spa-rest-sql/stages/phase-0/03-knowledge-tester.md` | Interview Coach | No artifacts (preparation only) |
 
 **On-demand stages** are not part of the phase cycle. Invoke them anytime:
 - **Stage 0** (`/start-stage 0`) — Fix workflow issues
 - **Stage D** (`/start-stage d`) — Generate diagrams and visual aids from artifacts
 - **Stage I** (`/start-stage i`) — Import external artifacts and adapt them to workflow format
+- **Stage T** (`/start-stage t`) — Pre-meeting knowledge check (quiz yourself on all decisions)
 
 ### Phase 1: Discovery + Tech Selection
 
@@ -187,6 +189,7 @@ Check `docs/` for existing artifacts:
 - `/start-stage 0` → Meta-Workflow (fix workflow issues)
 - `/start-stage d` → Diagram Assistant (visualize artifacts)
 - `/start-stage i` → Import an external artifact into workflow format
+- `/start-stage t` → Knowledge Tester (pre-meeting quiz)
 - `/export-log <phase>-<stage>` → Export conversation to docs/logs/
 
 ### Natural Language

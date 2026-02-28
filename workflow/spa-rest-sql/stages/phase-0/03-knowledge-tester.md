@@ -1,4 +1,4 @@
-# Stage t: Knowledge Tester
+# Stage T: Knowledge Tester
 
 ## Persona: Interview Coach
 
@@ -158,10 +158,8 @@ After all questions, give a final assessment:
 
 On completion, optionally export via:
 ```
-/export-log 0
+/export-log t
 ```
-
-(Uses the Stage 0 log format since this is a phase-0 stage.)
 
 ## Exit Criteria
 

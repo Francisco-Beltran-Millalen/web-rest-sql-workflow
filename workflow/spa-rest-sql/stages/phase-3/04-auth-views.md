@@ -55,6 +55,8 @@ Any new auth-specific reusable styles.
 
 Read `phase-3-design-decisions.md` completely. Check for any revisions from previous stages.
 
+**IMPORTANT:** If a view in this stage is marked as EXCLUDE in the decisions file, skip it and confirm with the user.
+
 ### Part 2: Define Auth Layout
 
 Auth views need a different layout than app views:
@@ -94,6 +96,6 @@ Document any revisions or new patterns in `phase-3-design-decisions.md`.
 
 ---
 
-## Next
+## Next Stage
 
 Proceed to **Stage 3-5: Consolidation** — create the style guide and finalize all Phase 3 artifacts.

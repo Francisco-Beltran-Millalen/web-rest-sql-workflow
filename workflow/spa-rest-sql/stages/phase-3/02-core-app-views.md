@@ -103,6 +103,6 @@ If new patterns were introduced or existing decisions were revised:
 
 ---
 
-## Next
+## Next Stage
 
 Proceed to **Stage 3-3: User Views** — apply the design direction to the user views identified in the view inventory.

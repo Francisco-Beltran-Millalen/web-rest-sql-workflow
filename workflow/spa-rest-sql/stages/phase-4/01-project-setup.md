@@ -102,13 +102,13 @@ GET /health → { "status": "ok", "database": "connected" }
 
 This verifies: routing works, DB connection works, JSON serialization works.
 
-#### 5. Testing Infrastructure
+#### 4. Testing Infrastructure
 
 Set up the test runner and create one example test:
 - Unit test: a trivial test that passes (proves test infra works)
 - Integration test: hit the health endpoint (proves test server works)
 
-#### 6. Development Workflow
+#### 5. Development Workflow
 
 Verify these work:
 - Start the dev server
@@ -194,4 +194,8 @@ Initialize the persistence document for Phase 4:
 
 ## Next Stage
 
-Proceed to **Phase 4, Stage 2: Implementation Loop** — implement use cases one at a time, by priority.
+Proceed to either:
+- **Stage 4-2: Implementation Loop** — AI writes the code, you review and approve
+- **Stage 4-3: Learning Guide** — you write the code, AI guides you
+
+Choose per use case. Both stages share the same persistence document (`implementation-decisions.md`).
