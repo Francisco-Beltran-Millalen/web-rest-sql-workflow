@@ -12,10 +12,11 @@ Start the specified workflow stage.
 ## Instructions
 
 1. Parse the stage identifier:
-   - If `0`: Read `workflow/web-rest-sql/stages/phase-0/00-meta-workflow.md`
-   - If `d`: Read `workflow/web-rest-sql/stages/phase-0/01-diagram-assistant.md`
-   - If `i`: Read `workflow/web-rest-sql/stages/phase-0/02-import-artifact.md`
-   - If `<phase>-<stage>`: Read `workflow/web-rest-sql/stages/phase-<phase>/0<stage>-*.md`
+   - If `0`: Read `workflow/spa-rest-sql/stages/phase-0/00-meta-workflow.md`
+   - If `d`: Read `workflow/spa-rest-sql/stages/phase-0/01-diagram-assistant.md`
+   - If `i`: Read `workflow/spa-rest-sql/stages/phase-0/02-import-artifact.md`
+   - If `t`: Read `workflow/spa-rest-sql/stages/phase-0/03-knowledge-tester.md`
+   - If `<phase>-<stage>`: Read `workflow/spa-rest-sql/stages/phase-<phase>/0<stage>-*.md`
 2. Adopt the persona defined in the stage file
 3. Check `docs/` for existing artifacts
 4. Follow the stage process
@@ -26,6 +27,7 @@ Start the specified workflow stage.
 - 0: meta-workflow (fix workflow issues)
 - d: diagram-assistant (visualize artifacts)
 - i: import-artifact (import and adapt external artifacts)
+- t: knowledge-tester (pre-meeting knowledge check)
 
 ### Phase 1: Discovery + Tech Selection
 - 1-1: project-definition
@@ -50,7 +52,8 @@ Start the specified workflow stage.
 
 ### Phase 4: Prototype Implementation
 - 4-1: project-setup
-- 4-2: implementation-loop (repeats per use case)
+- 4-2: implementation-loop (repeats per use case; AI writes, user reviews)
+- 4-3: learning-guide (repeats per use case; user writes, AI guides)
 
 ## Example Usage
 

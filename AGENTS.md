@@ -2,7 +2,7 @@
 
 ## Workflow System
 
-This project uses a structured **Web REST SQL App Workflow** — a specialized workflow for building web applications with REST endpoints, separated Backend and Frontend, and SQL persistence.
+This project uses a structured **SPA REST SQL Workflow** — a specialized workflow for building web applications with REST endpoints, separated Backend and Frontend, and SQL persistence.
 
 The workflow has **four phases**:
 
@@ -50,9 +50,9 @@ Examples:
 
 | Stage | File | Persona | Output |
 |-------|------|---------|--------|
-| 0 | `workflow/web-rest-sql/stages/phase-0/00-meta-workflow.md` | Workflow Engineer | `workflow-changelog.md` |
-| D | `workflow/web-rest-sql/stages/phase-0/01-diagram-assistant.md` | Visual Communicator | `assets/diagrams/*.md` |
-| I | `workflow/web-rest-sql/stages/phase-0/02-import-artifact.md` | Artifact Importer | `imported-artifacts/*-imported.md` |
+| 0 | `workflow/spa-rest-sql/stages/phase-0/00-meta-workflow.md` | Workflow Engineer | `workflow-changelog.md` |
+| D | `workflow/spa-rest-sql/stages/phase-0/01-diagram-assistant.md` | Visual Communicator | `assets/diagrams/*.md` |
+| I | `workflow/spa-rest-sql/stages/phase-0/02-import-artifact.md` | Artifact Importer | `imported-artifacts/*-imported.md` |
 
 **On-demand stages** are not part of the phase cycle. Invoke them anytime:
 - **Stage 0** (`/start-stage 0`) — Fix workflow issues
@@ -63,31 +63,31 @@ Examples:
 
 | Stage | File | Persona | Output |
 |-------|------|---------|--------|
-| 1-1 | `workflow/web-rest-sql/stages/phase-1/01-project-definition.md` | Project Initiator | `project-brief.md` |
-| 1-2 | `workflow/web-rest-sql/stages/phase-1/02-knowledge-audit.md` | Knowledge Auditor | `knowledge-audit.md` |
-| 1-3 | `workflow/web-rest-sql/stages/phase-1/03-research.md` | Research Analyst | `research-findings.md` |
-| 1-4 | `workflow/web-rest-sql/stages/phase-1/04-use-case-discovery.md` | Use Case Analyst | `use-cases.md` |
-| 1-5 | `workflow/web-rest-sql/stages/phase-1/05-tech-selection.md` | Tech Lead | `tech-stack.md`, `adrs/` |
-| 1-6 | `workflow/web-rest-sql/stages/phase-1/06-consolidation.md` | Technical Writer | **`consolidation-artifacts/phase-1-consolidation.md`** |
+| 1-1 | `workflow/spa-rest-sql/stages/phase-1/01-project-definition.md` | Project Initiator | `project-brief.md` |
+| 1-2 | `workflow/spa-rest-sql/stages/phase-1/02-knowledge-audit.md` | Knowledge Auditor | `knowledge-audit.md` |
+| 1-3 | `workflow/spa-rest-sql/stages/phase-1/03-research.md` | Research Analyst | `research-findings.md` |
+| 1-4 | `workflow/spa-rest-sql/stages/phase-1/04-use-case-discovery.md` | Use Case Analyst | `use-cases.md` |
+| 1-5 | `workflow/spa-rest-sql/stages/phase-1/05-tech-selection.md` | Tech Lead | `tech-stack.md`, `adrs/` |
+| 1-6 | `workflow/spa-rest-sql/stages/phase-1/06-consolidation.md` | Technical Writer | **`consolidation-artifacts/phase-1-consolidation.md`** |
 
 ### Phase 2: Sketching & Data Modeling
 
 | Stage | File | Persona | Output |
 |-------|------|---------|--------|
-| 2-1 | `workflow/web-rest-sql/stages/phase-2/01-entity-ui-sketching.md` | Domain Modeler + UI Sketcher | `entity-map.md`, `assets/views/*.html`, `view-entity-mapping.md` |
-| 2-2 | `workflow/web-rest-sql/stages/phase-2/02-data-modeling.md` | Data Architect | `data-model-conceptual.md`, `data-model-physical.md`, `assets/schema.sql`, `assets/diagrams/entity-diagram.md` |
-| 2-3 | `workflow/web-rest-sql/stages/phase-2/03-endpoint-design.md` | API Designer | `api-design.md` (with JSON contracts + view-endpoint mapping) |
-| 2-4 | `workflow/web-rest-sql/stages/phase-2/04-consolidation.md` | Technical Writer | **`consolidation-artifacts/phase-2-consolidation.md`**, `assets/` |
+| 2-1 | `workflow/spa-rest-sql/stages/phase-2/01-entity-ui-sketching.md` | Domain Modeler + UI Sketcher | `entity-map.md`, `assets/views/*.html`, `view-entity-mapping.md` |
+| 2-2 | `workflow/spa-rest-sql/stages/phase-2/02-data-modeling.md` | Data Architect | `data-model-conceptual.md`, `data-model-physical.md`, `assets/schema.sql`, `assets/diagrams/entity-diagram.md` |
+| 2-3 | `workflow/spa-rest-sql/stages/phase-2/03-endpoint-design.md` | API Designer | `api-design.md` (with JSON contracts + view-endpoint mapping) |
+| 2-4 | `workflow/spa-rest-sql/stages/phase-2/04-consolidation.md` | Technical Writer | **`consolidation-artifacts/phase-2-consolidation.md`**, `assets/` |
 
 ### Phase 3: UI Polish
 
 | Stage | File | Persona | Output |
 |-------|------|---------|--------|
-| 3-1 | `workflow/web-rest-sql/stages/phase-3/01-visual-design.md` | UI Designer | Main view styled, `phase-3-design-decisions.md`, `assets/css/styles.css` |
-| 3-2 | `workflow/web-rest-sql/stages/phase-3/02-core-app-views.md` | UI Designer | Core app views styled |
-| 3-3 | `workflow/web-rest-sql/stages/phase-3/03-user-views.md` | UI Designer | User views styled |
-| 3-4 | `workflow/web-rest-sql/stages/phase-3/04-auth-views.md` | UI Designer | Auth views styled |
-| 3-5 | `workflow/web-rest-sql/stages/phase-3/05-consolidation.md` | Technical Writer | **`consolidation-artifacts/ui-style-guide.md`**, updated `index.html` |
+| 3-1 | `workflow/spa-rest-sql/stages/phase-3/01-visual-design.md` | UI Designer | Main view styled, `phase-3-design-decisions.md`, `assets/css/styles.css` |
+| 3-2 | `workflow/spa-rest-sql/stages/phase-3/02-core-app-views.md` | UI Designer | Core app views styled |
+| 3-3 | `workflow/spa-rest-sql/stages/phase-3/03-user-views.md` | UI Designer | User views styled |
+| 3-4 | `workflow/spa-rest-sql/stages/phase-3/04-auth-views.md` | UI Designer | Auth views styled |
+| 3-5 | `workflow/spa-rest-sql/stages/phase-3/05-consolidation.md` | Technical Writer | **`consolidation-artifacts/ui-style-guide.md`**, updated `index.html` |
 
 **`phase-3-design-decisions.md`** is a living artifact shared across all Phase 3 stages.
 
@@ -95,10 +95,11 @@ Examples:
 
 | Stage | File | Persona | Output |
 |-------|------|---------|--------|
-| 4-1 | `workflow/web-rest-sql/stages/phase-4/01-project-setup.md` | Senior Developer | `prototype-code/` (working skeleton), `consolidation-artifacts/implementation-decisions.md` |
-| 4-2 | `workflow/web-rest-sql/stages/phase-4/02-implementation-loop.md` | Senior Developer | Working prototype, `implementation-decisions.md` |
+| 4-1 | `workflow/spa-rest-sql/stages/phase-4/01-project-setup.md` | Senior Developer | `prototype-code/` (working skeleton), `consolidation-artifacts/implementation-decisions.md` |
+| 4-2 | `workflow/spa-rest-sql/stages/phase-4/02-implementation-loop.md` | Senior Developer | Working prototype, `implementation-decisions.md` |
+| 4-3 | `workflow/spa-rest-sql/stages/phase-4/03-learning-guide.md` | Code Mentor | Working prototype, `implementation-decisions.md` |
 
-**Stage 4-2 repeats** per use case (dependency order — approved with user at start of first session). `implementation-decisions.md` is a persistence document — read at the start of every session, updated after every completed use case (checkpoint).
+**Stage 4-2 and 4-3 are alternatives** — use 4-2 (AI writes, you review) or 4-3 (you write, AI guides) per use case. Both repeat until all use cases are complete. `implementation-decisions.md` is a shared persistence document — read at the start of every session, updated after every completed use case (checkpoint).
 
 ## Critical Rules
 
@@ -114,7 +115,9 @@ Examples:
 
 This workflow is scoped to a specific application type:
 - **Web application** (browser-based UI)
-- **REST API** (JSON over HTTP)
+- **SPA frontend** (single-page application — React, Vue, Svelte, etc.)
+- **REST API** (JSON over HTTP, stateless)
+- **JWT authentication** (Bearer token — stateless, no server-side sessions)
 - **Separated frontend and backend**
 - **SQL database** (relational persistence)
 - **SQLite for prototyping** (always, regardless of production DB)
@@ -135,7 +138,7 @@ Stage 2-4 produces `consolidation-artifacts/phase-2-consolidation.md`, `view-ent
 
 Stage 3-5 consolidates all Phase 3 work into `consolidation-artifacts/ui-style-guide.md` — a comprehensive style guide whose Decision Log captures everything from `phase-3-design-decisions.md` (the Phase 3 working document, which is not forwarded to Phase 4). Phase 4 uses all prior artifacts: styled views, endpoint contracts, SQLite schema, and tech stack.
 
-The styled HTML views from Phase 3 become **server-side templates** in Phase 4. Stage 4-1 copies them to `prototype-code/templates/` and converts the main view from mock data to real template variables. Stage 4-2 completes the conversion use case by use case — each implemented use case also updates its corresponding template.
+The styled HTML views from Phase 3 are **design references** for SPA component development in Phase 4. The backend implements a pure JSON API — no template conversion is needed.
 
 ### Phase 4 → Correctness Workflow (Future)
 
@@ -225,7 +228,7 @@ project-root/
 │   ├── adrs/                    ← Architecture Decision Records
 │   └── *.md                     ← Working design artifacts
 └── workflow/
-    ├── web-rest-sql/            ← ACTIVE WORKFLOW
+    ├── spa-rest-sql/            ← ACTIVE WORKFLOW
     │   └── stages/
     │       ├── phase-0/         ← Meta-workflow
     │       ├── phase-1/         ← Discovery + Tech Selection stages
@@ -245,7 +248,7 @@ project-root/
 - Architecture decisions: `docs/adrs/`
 - Conversation logs: `docs/logs/`
 - Workflow changelog: `docs/workflow-changelog.md`
-- Stage files: `workflow/web-rest-sql/stages/phase-N/`
+- Stage files: `workflow/spa-rest-sql/stages/phase-N/`
 
 ## Project Status
 
@@ -293,7 +296,7 @@ project-root/
 
 ## Final Output
 
-The Web REST SQL App Workflow produces a **working prototype** with:
+The SPA REST SQL Workflow produces a **working prototype** with:
 - Implemented REST endpoints for all use cases
 - SQLite database with mock data
 - Automated tests (unit + integration)

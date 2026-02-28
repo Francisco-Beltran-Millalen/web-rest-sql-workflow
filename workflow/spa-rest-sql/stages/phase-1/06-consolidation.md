@@ -133,7 +133,6 @@ Create `consolidation-artifacts/phase-1-consolidation.md` with these sections:
 | Production DB | ... | ... |
 | Prototype DB | SQLite | 3 |
 | Frontend | ... | ... |
-| Template Engine | ... or N/A if SPA | ... |
 
 ### Key Decisions
 - [ADR-001 summary]

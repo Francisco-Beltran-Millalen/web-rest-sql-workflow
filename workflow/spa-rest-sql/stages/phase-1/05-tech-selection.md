@@ -28,7 +28,7 @@ What's open:
 - Web framework
 - Production database (PostgreSQL, MySQL, etc.)
 - ORM / database access library
-- Frontend approach (server-rendered, SPA, HTMX, etc.)
+- SPA framework (React, Vue, Svelte, etc.)
 - Authentication library
 - Testing framework
 - Build/dev tools
@@ -78,26 +78,12 @@ Present options relevant to the project. For each:
 
 #### Frontend Approach
 
-- Server-rendered templates (Jinja, Thymeleaf, etc.)
-- SPA (React, Vue, Svelte, etc.)
-- Hybrid (HTMX, Leptos, LiveView, etc.)
-- Consider: team expertise, interactivity needs, complexity
+This workflow is **SPA (single-page application) only**. The frontend is a separate JavaScript application that communicates with the backend via JSON API. Select the SPA framework:
 
-#### Template Engine
+- React, Vue, Svelte, Angular, etc.
+- Consider: team expertise, ecosystem, tooling
 
-If server-rendered or hybrid is chosen, select a template engine compatible with the chosen framework:
-
-- **Java**: Thymeleaf (Spring Boot), Qute (Quarkus), FreeMarker
-- **Rust**: Tera (Jinja2-like syntax), Askama (compile-time, type-safe), MiniJinja
-- **Python**: Jinja2 (Flask/FastAPI), Django templates
-- **Node.js**: Pug, EJS, Handlebars
-
-Consider:
-- Framework integration (some frameworks have a preferred or built-in engine)
-- Syntax familiarity with the team
-- Compile-time vs runtime rendering (trade-off: type safety vs flexibility)
-
-If SPA is chosen, skip this — the frontend framework handles rendering entirely.
+**Note:** Server-rendered templates and hybrid approaches (HTMX, etc.) are out of scope for this workflow.
 
 #### Authentication
 
@@ -162,8 +148,7 @@ Accepted
 ### Frontend
 | Category | Choice | Version |
 |----------|--------|---------|
-| Approach | [choice] | [version] |
-| Template Engine | [choice or N/A if SPA] | [version] |
+| Approach | SPA — [framework choice] | [version] |
 | ...| ... | ... |
 
 ### Dev Tools
@@ -200,7 +185,6 @@ Architecture Decision Records:
 - [ ] Web framework is selected
 - [ ] Production database is selected
 - [ ] Frontend approach is selected
-- [ ] Template engine selected (or confirmed N/A if SPA approach)
 - [ ] All supporting tools are selected
 - [ ] ADRs document key decisions
 - [ ] Development environment is defined

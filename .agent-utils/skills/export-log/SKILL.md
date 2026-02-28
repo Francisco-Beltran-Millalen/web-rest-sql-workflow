@@ -27,6 +27,7 @@ Examples:
 - 0 → `00-meta-workflow`
 - d → `0d-diagram-assistant`
 - i → `0i-import-artifact`
+- t → `0t-knowledge-tester`
 
 ### Phase 1: Discovery + Tech Selection
 - 1-1 → `1-1-project-definition`
@@ -52,3 +53,4 @@ Examples:
 ### Phase 4: Prototype Implementation
 - 4-1 → `4-1-project-setup`
 - 4-2 → `4-2-implementation-loop`
+- 4-3 → `4-3-learning-guide`

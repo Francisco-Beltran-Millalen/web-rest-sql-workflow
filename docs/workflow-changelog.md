@@ -2,6 +2,84 @@
 
 ---
 
+## 2026-02-27: SPA+JWT specialization — rename web-rest-sql to spa-rest-sql
+
+**Problem:** The workflow supported multiple frontend approaches (SPA, server-rendered, hybrid/HTMX) with conditional branches throughout every phase-4 stage. In practice, every project run used SPA+JWT. The server-rendered paths added noise, conditional complexity, and confusion.
+
+**Fix:** Specialized the workflow exclusively to SPA (single-page application) + stateless JWT authentication. Renamed the workflow directory, removed all server-rendered/template-engine content, and prescribed JWT (Bearer token) as the only auth pattern.
+
+**Changes:**
+1. Renamed `workflow/web-rest-sql/` → `workflow/spa-rest-sql/`
+2. Phase 1, Stage 5 (`05-tech-selection.md`): removed "Server-rendered templates" and "Hybrid (HTMX)" frontend options; removed entire "Template Engine" selection section; SPA is now the required frontend approach
+3. Phase 1, Stage 6 (`06-consolidation.md`): removed "Template Engine" row from stack summary table
+4. Phase 2, Stage 3 (`03-endpoint-design.md`): removed server-rendered auth pattern (form POST → 302 redirect + session cookie); kept only SPA pattern (JSON + Bearer token)
+5. Phase 3, Stage 5 (`05-consolidation.md`): removed "views become server-side templates in Phase 4" note; views are now design references for SPA component development
+6. Phase 4, Stage 1 (`01-project-setup.md`): removed `templates/` and `static/` from project structure; removed "Template Setup" section entirely; removed 4 server-rendered exit criteria checkboxes; removed "Pre-converted Templates" section from `implementation-decisions.md` template
+7. Phase 4, Stage 2 (`02-implementation-loop.md`): removed template step from Plan the Slice; removed server-rendered route signature variant; removed "Step 4: Update Template" section; renumbered remaining steps; removed 2 template exit criteria checkboxes
+8. Phase 4, Stage 3 (`03-learning-guide.md`): same template removals as Stage 4-2
+9. `AGENTS.md`: renamed workflow references; updated Architectural Assumptions to include SPA and JWT explicitly; updated Phase 3→4 handoff note; added Stage 4-3 to Phase 4 table
+10. `README.md`: renamed to "SPA REST SQL Workflow"; updated "This Workflow" section with SPA/JWT scope note
+11. `.agent-utils/skills/start-stage/SKILL.md`: updated all path references
+
+**Files:** `workflow/spa-rest-sql/stages/` (all phase-4 files, phase-1/05, phase-1/06, phase-2/03, phase-3/05, phase-0/00, phase-0/02), `AGENTS.md`, `README.md`, `.agent-utils/skills/start-stage/SKILL.md`
+
+---
+
+## 2026-02-27: Test involvement, test skills, and git-commit skill
+
+**Problem 1:** In Stage 4-2, the AI wrote tests and the user just ran them — no engagement with what the tests should cover or why.
+**Fix:** Added Step 5 "Design Tests" before the writing step. AI proposes Scenario / Input / Expected Output for each unit and integration test. User must approve the design before code is written. Renumbered old steps 5→6 (Write Tests), 6→7 (Verify), 7→8 (Checkpoint). Added exit criterion: "Test scenarios approved by user before writing."
+**Files:** `workflow/web-rest-sql/stages/phase-4/02-implementation-loop.md`
+
+---
+
+**Problem 2:** Stage 4-3 (Learning Guide) had the same passive test approach as 4-2 — just prompting the user to write tests without guiding the design process.
+**Fix:** Replaced the test section with a guided design loop: AI asks what scenarios to cover, corrects omissions with questions (not answers), user articulates input/expected output, then writes the test. AI reviews. Added exit criterion: "Test scenarios designed together."
+**Files:** `workflow/web-rest-sql/stages/phase-4/03-learning-guide.md`
+
+---
+
+**Problem 3:** No skill to run tests — users had to manually type test commands or remember the framework-specific syntax.
+**Fix:** Created two test skills:
+- `/run-all-tests`: reads `tech-stack.md`, determines the correct command for the framework, runs the full suite in `prototype-code/`, reports pass/fail.
+- `/run-stage-tests`: reads `implementation-decisions.md` to identify the current use case, runs only the tests for that use case using framework-appropriate filtering. Falls back to asking if context is unclear.
+**Files:** `.agent-utils/skills/run-all-tests/SKILL.md` (new), `.agent-utils/skills/run-stage-tests/SKILL.md` (new), `.claude/skills/run-all-tests/SKILL.md` (new), `.claude/skills/run-stage-tests/SKILL.md` (new)
+
+---
+
+**Problem 4:** No skill for git — users had to write all git commands manually, with no stage-aware commit messages.
+**Fix:** Created `/git-commit` skill. Walks through the full commit workflow one command at a time: `git status` → `git add [files]` → `git diff --staged --stat` → `git commit` → optional `git push`. For each command: shows the command, gives a plain-English explanation, asks "Run this? [yes / no / explain more]". Never runs a command without approval. Commit messages are stage-aware (feat/chore/design/docs/workflow prefix based on current stage and use case).
+**Files:** `.agent-utils/skills/git-commit/SKILL.md` (new), `.claude/skills/git-commit/SKILL.md` (new)
+
+---
+
+**Also:** Updated `.agent-utils/skills/export-log/SKILL.md` with new stage names: `t → 0t-knowledge-tester`, `4-3 → 4-3-learning-guide`.
+
+---
+
+## 2026-02-27: Three workflow improvements
+
+**Problem 1:** The EDGE CASES & EXCEPTIONS section in Stage 1-2 was consistently unanswerable during discovery — too early in the process to know what could go wrong. Users couldn't fill it out on any of the four systems the workflow has been used on.
+**Cause:** Edge cases require a full picture of the system (data model, UI flows, business rules) that only exists at the end of Phase 3.
+**Fix:** Removed the EDGE CASES & EXCEPTIONS prompt section from Stage 1-2. Added an "Edge Cases Review" as Step 0 in Stage 3-5 consolidation — before the style guide work, after all views are complete. Added a corresponding exit criterion.
+**Files:** `workflow/web-rest-sql/stages/phase-1/02-knowledge-audit.md`, `workflow/web-rest-sql/stages/phase-3/05-consolidation.md`
+
+---
+
+**Problem 2:** No way to prepare for client or boss meetings by testing your own knowledge of the system you built.
+**Cause:** The workflow had no "pre-meeting" on-demand stage.
+**Fix:** Created Stage t (Knowledge Tester) — an on-demand phase-0 stage. The Interview Coach persona reads all available artifacts (including `prototype-code/`) and quizzes the user with targeted questions about project decisions, business rules, data model, API design, UI decisions, and code structure. Ends with a readiness assessment and gap list.
+**Files:** `workflow/web-rest-sql/stages/phase-0/03-knowledge-tester.md` (new), `.agent-utils/skills/start-stage/SKILL.md`
+
+---
+
+**Problem 3:** Stage 4-2 (Senior Developer) writes the code and the user reviews it — good for shipping, but not for learning. Users with weaker technical skills don't build understanding by approving code they didn't write.
+**Cause:** Phase 4 had only one implementation mode.
+**Fix:** Created Stage 4-3 (Learning Guide) — a parallel alternative to Stage 4-2. The Code Mentor persona guides the user to write the code themselves: asks what the code should do before they write it, corrects misunderstandings, lets the user write, then reviews. Shares the same `implementation-decisions.md` persistence document with Stage 4-2 so both can be used on the same project.
+**Files:** `workflow/web-rest-sql/stages/phase-4/03-learning-guide.md` (new), `.agent-utils/skills/start-stage/SKILL.md`
+
+---
+
 ## 2026-02-19: Added consolidation-artifacts/ and prototype-code/ folders
 
 **Problem:** The workflow had no clear separation between committed project artifacts and working/intermediate files. All artifacts lived in `docs/`, which was gitignored in the workflow template repo. Starting a real project required no changes to the gitignore but left no clean answer for "what gets committed?" The workflow also had no specified location for the actual project code produced in Phase 4.

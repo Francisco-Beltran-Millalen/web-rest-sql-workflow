@@ -116,6 +116,42 @@ Navigation hub linking to all styled views, itself styled with the design system
 
 ## Process
 
+### 0. Edge Cases Review
+
+Before consolidating, surface edge cases now that the full design is visible.
+
+Tell the user:
+
+> "We've completed all the views. Before we lock in the style guide, let's surface edge cases — now that you can see the full system, you're in a much better position to answer these."
+
+Present these prompts one at a time and wait for responses:
+
+```
+What could go wrong in normal usage?
+
+-
+-
+-
+
+What are the unusual or boundary situations?
+(e.g. empty states, permission conflicts, data at extremes)
+
+-
+-
+
+For each case — what should the system do?
+```
+
+After responses, identify:
+- **Handled**: The existing design already covers this
+- **Needs UI**: Requires an additional view or state (note it — may affect views)
+- **Backend concern**: Logic/validation issue (note for Phase 4)
+- **Deferred**: Unknown now, revisit during implementation
+
+Add a brief **Edge Cases** section to `consolidation-artifacts/ui-style-guide.md` (under Decision Log) noting what was surfaced and how each is addressed or deferred.
+
+---
+
 ### 1. Audit All Views
 
 Open each styled view and verify:
@@ -145,6 +181,7 @@ Walk through the complete set of styled views with the user:
 
 ## Exit Criteria
 
+- [ ] Edge cases reviewed and documented (handled / needs UI / backend concern / deferred)
 - [ ] All styled views audited for consistency
 - [ ] `consolidation-artifacts/ui-style-guide.md` is complete
 - [ ] `consolidation-artifacts/ui-style-guide.md` Decision Log captures all key decisions from `phase-3-design-decisions.md` (no information loss)
@@ -172,4 +209,4 @@ Input for Phase 4:
 - `docs/assets/css/styles.css` (base stylesheet)
 - `docs/tech-stack.md` (selected technologies)
 
-**Note:** The styled views in `docs/assets/views/` become server-side templates in Phase 4. Stage 4-1 copies them to the project's `templates/` folder and converts the main view from mock data to real template variables. Stage 4-2 completes the conversion use case by use case — each implemented use case also updates its corresponding template.
+**Note:** The styled views in `docs/assets/views/` are design references for SPA component development in Phase 4. No template conversion is needed — the backend implements a pure JSON API.

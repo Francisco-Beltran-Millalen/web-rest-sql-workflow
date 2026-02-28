@@ -74,12 +74,8 @@ Pieces needed:
 1. Model: Order (if not already created)
 2. Repository: OrderRepository.find_by_id(id) → Order | null
 3. Service: OrderService.get_order_details(id) → OrderDetailsResponse
-4. Route: GET /orders/{id}
-   - Server-rendered / hybrid: renders order-detail template with real data
-   - SPA: returns OrderDetailsResponse as JSON
-5. Template: order-detail — replace mock data with template variables
-   (server-rendered / hybrid only; skip for SPA)
-6. Tests: unit test for service, integration test for endpoint
+4. Route: GET /orders/{id} — returns OrderDetailsResponse as JSON (Bearer token auth)
+5. Tests: unit test for service, integration test for endpoint
 ```
 
 Present this to the user. Confirm the plan before writing code.
@@ -117,29 +113,17 @@ Service: OrderService
   Approve? [user responds]
 ```
 
-**Route signature depends on frontend approach (check `tech-stack.md`):**
+All routes return JSON; auth uses Bearer token.
 
-- **Server-rendered / hybrid**: View routes render HTML via the template engine; auth uses the session.
-  ```
-  Route: GET /orders/{id}
+```
+Route: GET /orders/{id}
 
-    Input:  path param id: int, session (from auth middleware)
-    Output: 200 → HTML (renders order-detail template with OrderDetailsResponse data)
-    Errors: 404 → renders error page or redirects
+  Input:  path param id: int, auth token (Bearer)
+  Output: 200 → OrderDetailsResponse as JSON
+  Errors: 404 → ORDER_NOT_FOUND
 
-    Approve? [user responds]
-  ```
-
-- **SPA**: All routes return JSON; auth uses Bearer token.
-  ```
-  Route: GET /orders/{id}
-
-    Input:  path param id: int, auth token (Bearer)
-    Output: 200 → OrderDetailsResponse as JSON
-    Errors: 404 → ORDER_NOT_FOUND
-
-    Approve? [user responds]
-  ```
+  Approve? [user responds]
+```
 
 **IMPORTANT:** Do NOT implement until the user approves each signature. If the user suggests changes, adjust and re-propose.
 
@@ -157,29 +141,49 @@ Once all signatures are approved, implement each function:
 
 ---
 
-#### Step 4: Update Template
+#### Step 4: Design Tests
 
-**SPA frontends:** Skip this step entirely. Routes return JSON; the SPA handles rendering.
+Before writing any test, propose the design for each one:
 
-**Server-rendered / hybrid — for use cases that render a view:**
+```
+Unit test — OrderService.get_order_details
 
-1. Check `consolidation-artifacts/implementation-decisions.md` → "Pre-converted Templates" section. If this template was already converted in Stage 4-1, verify it and complete any remaining mock data replacement rather than converting from scratch.
-2. Open the corresponding template in `prototype-code/templates/`
-3. Replace hardcoded mock data with template variables from the service response
-4. Keep all styling — only swap the data layer (classes, structure, and layout stay as Phase 3 defined them)
-5. Verify the view renders correctly in the browser
+  Scenario: Order exists
+  Input:    order_id = 42 (mock repository returns an Order)
+  Expected: Returns OrderDetailsResponse with correct order, items, customer
 
-For API-only use cases (no corresponding view), skip this step.
+  Scenario: Order not found
+  Input:    order_id = 999 (mock repository returns null)
+  Expected: Throws OrderNotFoundError
+
+  Approve? [user responds]
+```
+
+```
+Integration test — GET /orders/{id}
+
+  Scenario: Valid request
+  Input:    GET /orders/1, valid JWT, order exists in DB
+  Expected: 200 → OrderDetailsResponse JSON with correct data
+
+  Scenario: Order not found
+  Input:    GET /orders/999, valid JWT
+  Expected: 404 → { "error": "ORDER_NOT_FOUND" }
+
+  Scenario: Unauthenticated
+  Input:    GET /orders/1, no token
+  Expected: 401
+
+  Approve? [user responds]
+```
+
+**Do NOT write test code until the user approves the design.** If the user adjusts the scenarios, update and re-propose.
 
 ---
 
 #### Step 5: Write Tests
 
-For each piece:
-- **Unit test** for the service (mock the repository)
-- **Integration test** for the endpoint (real DB with mock data)
-
-Show the tests to the user. Run them.
+With the approved design, implement each test. Show the test code to the user.
 
 ---
 
@@ -265,8 +269,7 @@ Complete record of:
 - [ ] Repository implemented
 - [ ] Service implemented
 - [ ] Route/handler implemented
-- [ ] Template updated with real data (server-rendered / hybrid only; skip for SPA)
-- [ ] View renders correctly in browser (server-rendered / hybrid only; if use case has a view)
+- [ ] Test scenarios (input/expected output) approved by user before writing
 - [ ] Unit tests written and passing
 - [ ] Integration tests written and passing
 - [ ] All existing tests still passing

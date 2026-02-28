@@ -1,4 +1,4 @@
-# Web REST SQL Workflow
+# SPA REST SQL Workflow
 
 A structured, AI-collaborative workflow for building web application prototypes — from raw idea to working code, one stage at a time.
 
@@ -78,12 +78,16 @@ Adding support for a new LLM tool requires:
 
 ---
 
-## This Workflow: web-rest-sql
+## This Workflow: spa-rest-sql
 
-The `web-rest-sql` workflow is a specialization for building web applications with:
-- A **REST API** (JSON over HTTP)
+The `spa-rest-sql` workflow is a specialization for building web applications with:
+- A **SPA frontend** (single-page application — React, Vue, Svelte, etc.)
+- A **REST API** (JSON over HTTP, stateless)
+- **JWT authentication** (Bearer token — no server-side sessions)
 - A **separated frontend and backend**
 - A **SQL database** (SQLite for prototyping, any relational DB for production)
+
+**Note:** Server-rendered templates and hybrid approaches (HTMX, etc.) are out of scope for this workflow.
 
 ### The Four Phases
 
@@ -188,7 +192,7 @@ project-root/
 │   ├── adrs/                    ← Architecture Decision Records
 │   └── *.md                     ← Working design artifacts (project-brief.md, use-cases.md, etc.)
 └── workflow/
-    ├── web-rest-sql/            ← The active workflow
+    ├── spa-rest-sql/            ← The active workflow
     │   └── stages/              ← Stage files (one per stage, organized by phase)
     ├── templates/               ← Output templates
     └── scripts/                 ← Automation scripts (log export, auto-export)
@@ -210,7 +214,7 @@ project-root/
 
 ## Building Your Own Workflow
 
-The `web-rest-sql` specialization lives in `workflow/web-rest-sql/`. The philosophy it runs on is generic.
+The `spa-rest-sql` specialization lives in `workflow/spa-rest-sql/`. The philosophy it runs on is generic.
 
 If you wanted to build a `cli-tool` workflow or a `data-pipeline` workflow, the structure would be the same:
 
@@ -227,7 +231,7 @@ The core ideas that transfer to any workflow:
 - Personas prevent scope creep
 - Stage 0 makes the workflow self-correcting
 
-The `web-rest-sql` specialization is one application of these ideas. Build the next one on the same foundation.
+The `spa-rest-sql` specialization is one application of these ideas. Build the next one on the same foundation.
 
 ---
 

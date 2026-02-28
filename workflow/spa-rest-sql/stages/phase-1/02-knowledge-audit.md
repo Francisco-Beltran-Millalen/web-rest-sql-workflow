@@ -118,25 +118,6 @@ Are there APIs you need to use or provide?
 
 ---
 
-**EDGE CASES & EXCEPTIONS**
-
-```
-What could go wrong?
-
--
--
--
-
-What are the weird edge cases?
-
--
--
-
-What should happen in each case?
-```
-
----
-
 **TECHNICAL UNDERSTANDING**
 
 ```

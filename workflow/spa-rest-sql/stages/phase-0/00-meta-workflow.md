@@ -77,7 +77,7 @@ Common categories:
 ### 3. Implement Fix
 
 Depending on the issue:
-- Edit the relevant stage file (`workflow/web-rest-sql/stages/`)
+- Edit the relevant stage file (`workflow/spa-rest-sql/stages/`)
 - Update CLAUDE.md
 - Fix or create scripts (`workflow/scripts/`)
 - Adjust hook configuration (`.claude/settings.json`)
@@ -126,7 +126,7 @@ Append-only log of workflow changes:
 ### Modified Files
 
 Any workflow files that were patched:
-- `workflow/web-rest-sql/stages/*.md`
+- `workflow/spa-rest-sql/stages/*.md`
 - `.claude/settings.json`
 - `CLAUDE.md`
 

@@ -204,25 +204,18 @@ Establish a consistent error response format:
 
 Document how clients authenticate (contract, not implementation).
 
-**The pattern depends on the frontend approach chosen in Stage 1-5:**
+This workflow uses **Bearer token authentication** (SPA + stateless JWT).
 
-- **Server-rendered / hybrid (htmx, etc.)**: Auth uses HTML form submissions. Login is a `POST` with form data that returns a `302` redirect with a session cookie. No JSON token.
-  ```
-  POST /auth/login    → form data (email, password) → 302 redirect to home (session cookie set)
-  POST /auth/logout   → (uses session) → 302 redirect to login
-  ```
+```
+Authentication:
+  Method: Bearer Token
+  Header: Authorization: Bearer {token}
 
-- **SPA (React, Vue, etc.)**: Auth uses JSON request/response with a Bearer token.
-  ```
-  Authentication:
-    Method: Bearer Token
-    Header: Authorization: Bearer {token}
+POST /auth/login    → { email, password } → { token, expires_at }
+POST /auth/logout   → (uses current token) → 204 No Content
+```
 
-  POST /auth/login    → { email, password } → { token, expires_at }
-  POST /auth/logout   → (uses current token) → 204 No Content
-  ```
-
-Document the pattern appropriate to the project's chosen approach.
+Document the token format, expiration, and any refresh token strategy.
 
 #### 2. Authorization Rules
 

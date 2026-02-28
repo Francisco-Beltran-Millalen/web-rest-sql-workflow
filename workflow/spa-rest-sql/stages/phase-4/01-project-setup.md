@@ -21,15 +21,15 @@ This is the foundation that Stage 4-2 will build on, one use case at a time.
 
 ## Input Artifacts
 
-- `tech-stack.md` (language, framework, dependencies — including template engine)
+- `tech-stack.md` (language, framework, dependencies)
 - `adrs/` (architecture decisions)
 - `data-model-physical.md` (SQLite schema)
 - `assets/schema.sql` (database script with mock data)
 - `api-design.md` (endpoint contracts — for reference, not implementation yet)
 - `consolidation-artifacts/phase-1-consolidation.md` (scope and use cases)
 - `consolidation-artifacts/ui-style-guide.md` (component patterns, view inventory)
-- `docs/assets/views/` (Phase 3 styled views — become server-side templates in this stage)
-- `docs/assets/css/styles.css` (base stylesheet — copied to `static/css/` in this stage)
+- `docs/assets/views/` (Phase 3 styled views — design references for SPA component development)
+- `docs/assets/css/styles.css` (base stylesheet)
 
 ## Process
 
@@ -59,8 +59,6 @@ prototype-code/
 │   ├── repositories/
 │   ├── models/
 │   └── errors/
-├── templates/              ← Phase 3 views converted to server-side templates (server-rendered / hybrid only)
-├── static/                 ← CSS, JS, images (from docs/assets/css/) (server-rendered / hybrid only)
 ├── tests/
 │   ├── unit/
 │   └── integration/
@@ -94,23 +92,7 @@ prototype-code/
 
 Add this to the database connection setup code — not just the schema script. Verify it's applied before the health check passes.
 
-#### 3. Template Setup
-
-**Depends on frontend approach from `tech-stack.md`:**
-
-- **SPA (React, Vue, etc.):** Skip this step. Phase 3 views are design references for SPA component development. Phase 4 implements a pure REST JSON API — the SPA frontend is built separately.
-
-- **Server-rendered / hybrid:**
-  - Add the template engine dependency (from `tech-stack.md`)
-  - Configure the engine to serve templates from the `prototype-code/templates/` folder
-  - Copy all Phase 3 styled views from `docs/assets/views/` to `prototype-code/templates/`
-  - Copy the base stylesheet from `docs/assets/css/styles.css` to `prototype-code/static/css/`
-  - Convert **one view** (the main view from `ui-style-guide.md`) from static mock data to real template variables — proves the template engine works end-to-end
-  - Serve that view from a route and verify it renders in the browser with real data from the database
-
-  **IMPORTANT:** Only the main view needs full conversion now. The remaining views are converted use case by use case in Stage 4-2.
-
-#### 4. Health Check Endpoint
+#### 3. Health Check Endpoint
 
 Create one minimal endpoint to prove everything works:
 
@@ -175,9 +157,6 @@ Initialize the persistence document for Phase 4:
 ## Tech Stack
 [Reference to tech-stack.md — brief summary]
 
-## Pre-converted Templates (Stage 4-1)
-- [main view filename] — converted as proof of concept; Stage 4-2 should verify and complete as needed
-
 ## Progress
 
 ### Completed Use Cases
@@ -205,10 +184,6 @@ Initialize the persistence document for Phase 4:
 - [ ] Project compiles and runs
 - [ ] SQLite database is set up with schema and mock data
 - [ ] GET /health endpoint returns successfully
-- [ ] Template engine is configured (server-rendered / hybrid only)
-- [ ] Phase 3 views are copied to the `prototype-code/templates/` folder (server-rendered / hybrid only)
-- [ ] Static assets (CSS) are copied to the `prototype-code/static/` folder (server-rendered / hybrid only)
-- [ ] At least one view renders real data from the database via the server (server-rendered / hybrid only)
 - [ ] At least one unit test passes
 - [ ] At least one integration test passes
 - [ ] Folder structure is ready for feature implementation
