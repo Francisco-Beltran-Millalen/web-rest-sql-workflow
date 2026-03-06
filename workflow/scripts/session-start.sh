@@ -12,12 +12,18 @@ PROJECT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 AUTO_EXPORT_SCRIPT="$SCRIPT_DIR/auto-export.sh"
 OUTPUT_DIR="$PROJECT_DIR/docs/logs"
 INTERVAL=300  # 5 minutes in seconds
+PYTHON=""
+for cmd in python3 python py; do
+  if command -v "$cmd" &>/dev/null && "$cmd" -c "import sys; sys.exit(0)" &>/dev/null; then
+    PYTHON="$cmd"; break
+  fi
+done
 
 # Read JSON input from stdin
 INPUT=$(cat)
 
 # Extract transcript path
-TRANSCRIPT_PATH=$(echo "$INPUT" | python3 -c "import sys, json; print(json.load(sys.stdin).get('transcript_path', ''))")
+TRANSCRIPT_PATH=$(echo "$INPUT" | $PYTHON -c "import sys, json; print(json.load(sys.stdin).get('transcript_path', ''))")
 
 if [ -z "$TRANSCRIPT_PATH" ]; then
     echo "Error: No transcript_path in input" >&2

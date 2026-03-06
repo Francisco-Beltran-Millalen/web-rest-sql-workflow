@@ -43,6 +43,22 @@ What's open:
 
 ## Process
 
+### 0. Set Decision Priorities
+
+Before selecting any technology, ask the user what they value most for this project. This frames all recommendations that follow.
+
+Present these priorities and ask them to rank or identify their top 1–2:
+
+- **Familiarity** — use what you already know; move fast, fewer surprises
+- **Learning** — use what you want to learn; accept a slower start
+- **Community / ecosystem** — battle-tested libraries, lots of answers online
+- **Production-readiness** — choose what you'd actually ship in production
+
+Example prompt:
+> "Before we pick the stack, I want to understand your priorities. What matters most to you for this project — moving fast with familiar tools, learning something new, or choosing what you'd use in production? You can pick more than one."
+
+Use the answers to calibrate every recommendation in Step 2.
+
 ### 1. Extract Constraints
 
 From the project brief and knowledge audit, identify:
@@ -55,15 +71,28 @@ From the project brief and knowledge audit, identify:
 
 ### 2. Select Technologies
 
-For each category, present 2-3 options with trade-offs. Recommend one based on the constraints.
+**One category at a time.** Present the category, discuss trade-offs, wait for the user to confirm their choice, then move to the next category. Do NOT present all categories at once.
+
+Use this format for each category:
+
+```
+### [Category Name]
+
+| Option | Pros | Cons | Best for |
+|--------|------|------|----------|
+| A      | ...  | ...  | ...      |
+| B      | ...  | ...  | ...      |
+
+**Recommendation:** [option] — [one sentence tied to the user's stated priorities]
+
+> Your choice?
+```
+
+Work through these categories in order:
 
 #### Backend Language + Framework
 
-Present options relevant to the project. For each:
-- Team familiarity
-- Ecosystem maturity for this type of project
-- Performance characteristics
-- Learning curve
+Present 2–3 options relevant to the project. Tailor to what makes sense given the user's background.
 
 #### Production Database
 
@@ -77,16 +106,16 @@ Present options relevant to the project. For each:
 - Migration support
 - Type safety
 
-#### Frontend Approach
+#### Frontend Framework
 
-This workflow is **SPA (single-page application) only**. The frontend is a separate JavaScript application that communicates with the backend via JSON API. Select the SPA framework:
+This workflow is **SPA (single-page application) only**. The frontend is a separate JavaScript application that communicates with the backend via JSON API.
 
 - React, Vue, Svelte, Angular, etc.
 - Consider: team expertise, ecosystem, tooling
 
 **Note:** Server-rendered templates and hybrid approaches (HTMX, etc.) are out of scope for this workflow.
 
-#### Authentication
+#### Authentication Library
 
 Authentication mechanism is **fixed**: JWT (Bearer token, stateless — no server-side sessions). This is not a decision point.
 

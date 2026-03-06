@@ -2,6 +2,112 @@
 
 ---
 
+## 2026-03-06: Game development branch — full workflow design (Phases 0–5)
+
+**Problem:** The workflow had no game development branch. Only the Web branch (SPA + REST + SQL) existed. The Branching Architecture section listed "Game development" as Planned with no path.
+
+**Cause:** The game branch was planned from the start but had not been designed. This session produced the full design.
+
+**Fix:** Created `workflow/game/` with all stage files (25 files across 6 phases). Design decisions:
+- Phase 0 (on-demand tools): copied from web with game-specific adaptations (import heuristics, knowledge tester categories, diagram types)
+- Phase 1: largely same structure as web; Stage 1-4 replaced `use-case-discovery` with `mechanic-discovery` (core loop → player mechanics ping-pong → world mechanics 3-by-3 → standard systems)
+- Phase 2 (Game Design): new — core-loop-design (states, win/lose conditions), entity-design (properties, behaviors, primitive visuals, interaction matrix), level-design (optional/conditional), consolidation
+- Phase 3 (Visual & Audio Design): simplified for prototype era — visual-design (color palette, entity → shape/color/size, HUD, menus, animation descriptions), audio-design (SFX event map, music mood, source plan skeleton), consolidation
+- Phase 4 (Implementation): adapted from web; implementation loop per **mechanic** instead of per use case; architecture options are Simple OOP vs ECS (not fixed like web's REST pattern); "health check" = window opens + player primitive visible; refactor audit dimensions are game-specific (loop purity, input abstraction, constants, entity patterns, state management, audio decoupling)
+- Phase 5 (Distribution): skeleton matching web's approach
+- Prototype asset strategy: all visual assets use geometric primitives (rectangles, circles, triangles + colors) — no image files required
+- Level design (Stage 2-3): optional/conditional — skip if game has no distinct levels
+- Updated `start-stage` SKILL.md to detect active branch from AGENTS.md before resolving paths (supports both `workflow/web/` and `workflow/game/`)
+
+**Files modified:**
+- `workflow/game/stages/` (25 new files)
+- `AGENTS.md` (game branch table, game branch phases, game stage files tables)
+- `.agent-utils/skills/start-stage/SKILL.md` (branch detection + game branch stage mapping)
+- `docs/workflow-changelog.md`
+
+---
+
+## 2026-03-06: Stage 4-4: Refactor — plan-first architecture cleanup before deployment
+
+**Problem:** After Phase 4 implementation, the prototype works but may have inconsistent error handling, missing input validation, security basics not enforced, and layer rule violations. There was no structured stage to address this before deployment.
+
+**Cause:** The "Correctness Workflow" was listed as a future concept but never designed. Stage 4-4 replaces it for the architecture/cleanup concern (not full production hardening, which remains future work).
+
+**Fix:** Created `workflow/web/stages/phase-4/04-refactor.md` — a new iterative stage that:
+- Audits the codebase across 5 dimensions (error handling, validation, security, layer rules, config)
+- Proposes a refactor roadmap, approved by the user before any code is touched
+- Iterates one area at a time: plan → approve → implement → verify tests pass
+- Ends with a 5-question comprehension check on what was changed and why (AI explains wrong answers)
+
+Updated "How to Determine Current Stage" in AGENTS.md to detect Stage 4-4 from the presence/absence of `## Refactoring` in `implementation-decisions.md`.
+
+**Files modified:**
+- `workflow/web/stages/phase-4/04-refactor.md` (new)
+- `workflow/web/stages/phase-4/02-implementation-loop.md` (updated "What Comes Next")
+- `workflow/web/stages/phase-4/03-learning-guide.md` (updated "What Comes Next")
+- `AGENTS.md`
+- `.agent-utils/skills/start-stage/SKILL.md`
+- `README.md`
+- `docs/workflow-changelog.md`
+
+---
+
+## 2026-03-06: Web workflow restructuring — branching architecture, improved tech selection, Phase 5
+
+**Problem:** The workflow was named `spa-rest-sql` with no branching concept. Phase 1 is generic (works for any project type), but this was not documented. The tech selection stage (1-5) lacked structure — no format for trade-off tables, no prioritization step before selection, and all categories were presented as a flat list without confirmation gates. There was no deployment phase.
+
+**Cause:** The workflow was designed as a single linear path. As it matures, it needs to branch at Phase 2 by project type, and extend beyond prototype implementation into deployment.
+
+**Fix:**
+1. Renamed `workflow/spa-rest-sql/` → `workflow/web/` — the current workflow is a web specialization
+2. Updated `AGENTS.md` with a branching architecture section: Phase 1 is generic; Phase 2+ branches by project type (Web active; Game/CLI/Mobile/Desktop planned)
+3. Improved `workflow/web/stages/phase-1/05-tech-selection.md`: added Step 0 (decision priorities), structured comparison table format, and one-category-at-a-time confirmation rule
+4. Created `workflow/web/stages/phase-5/01-deployment.md` — skeleton stage for deployment (to be expanded with experience)
+5. Updated all path references in `AGENTS.md` and `.agent-utils/skills/start-stage/SKILL.md`
+
+**Files modified:**
+- `workflow/spa-rest-sql/` → renamed to `workflow/web/`
+- `AGENTS.md`
+- `.agent-utils/skills/start-stage/SKILL.md`
+- `workflow/web/stages/phase-1/05-tech-selection.md`
+- `workflow/web/stages/phase-5/01-deployment.md` (new)
+- `docs/workflow-changelog.md`
+- `memory/MEMORY.md`
+
+---
+
+## 2026-03-06: Windows compatibility, new stages, descriptive stage identifiers
+
+**Problem 1:** Hooks (`SessionStart`/`SessionEnd`) failed on Windows — `.sh` files are not executable without an explicit shell prefix.
+
+**Problem 2:** The `export-log` skill used `pwd | sed 's|/|-|g'` to locate the Claude projects directory. This broke in two ways: (a) on Windows with Git Bash, `pwd` returns `/c/Users/...` which encodes differently from what Claude uses (`C--Users-...`); (b) when Claude Code is working inside a project subdirectory (common in Phase 4), `pwd` returns the subdirectory path — causing a lookup in the wrong project directory entirely. Relative paths in the converter command had the same CWD-sensitivity problem.
+
+**Problem 3:** New on-demand stages Teacher (`04-teacher.md`) and Git Assistant (`05-git-assistant.md`) were created but not registered in SKILL.md files or AGENTS.md.
+
+**Problem 4:** On-demand stage identifiers (`d`, `i`, `t`, `e`, `g`) were single letters with no mnemonic value — hard to remember without consulting documentation.
+
+**Problem 5:** Python detection used `command -v python3 || command -v python || command -v py`. On Windows, `python3` resolves to a Microsoft Store stub that exits with code 49 — `command -v` succeeds but running it fails, so the detection returned a broken command.
+
+**Cause:**
+- Hooks: missing `bash` prefix in `.claude/settings.json`
+- `export-log`: CWD-relative path logic; Unix-only path encoding; `python3` assumed
+- New stages: stage files created without updating skill registration or AGENTS.md
+- Identifiers: single-letter convention inherited from initial design, never revisited
+- Python detection: `command -v` only checks existence, not whether the command actually runs
+
+**Fix:**
+1. **Hooks** — Added `bash` prefix to both hook commands in `.claude/settings.json`
+2. **`export-log` skill** — Rewrote path resolution: Python script searches upward from CWD for `AGENTS.md` to anchor the project root (works from any subdirectory, any OS); encodes path using `os.sep` to avoid backslash escaping issues; uses absolute paths for converter script and output file
+3. **`session-start.sh`** — Applied same project-root and Python detection fixes
+4. **Stage registration** — Registered `teacher` and `git` in both SKILL.md files and AGENTS.md (arguments list, stage mapping, on-demand stages table, quick commands)
+5. **Stage identifier rename** — Replaced single-letter identifiers with descriptive words across all stage files, both SKILL.md files, and AGENTS.md:
+   - `d` → `diagram`, `i` → `import`, `t` → `knowledge`, `e` → `teacher`, `g` → `git`
+6. **Python detection** — Replaced `command -v` chain with a probe-and-test loop that verifies each candidate actually runs before selecting it; tries `python3`, `python`, `py` in order
+
+**Files:** `.claude/settings.json`, `.claude/skills/export-log/SKILL.md`, `.agent-utils/skills/start-stage/SKILL.md`, `.agent-utils/skills/export-log/SKILL.md`, `AGENTS.md`, `workflow/scripts/session-start.sh`, `workflow/spa-rest-sql/stages/phase-0/01-diagram-assistant.md`, `workflow/spa-rest-sql/stages/phase-0/02-import-artifact.md`, `workflow/spa-rest-sql/stages/phase-0/03-knowledge-tester.md`, `workflow/spa-rest-sql/stages/phase-0/04-teacher.md`, `workflow/spa-rest-sql/stages/phase-0/05-git-assistant.md`
+
+---
+
 ## 2026-03-01: Full audit — docs/ prefix, persona name, AGENTS.md references
 
 **Problem:** Full audit of all 20 stage files revealed a systemic issue: 14 stages listed input artifacts without the `docs/` prefix, meaning an AI reading those lists could look for files in the project root instead of `docs/`. Additionally, body text "Read X" instructions in Phase 3 and 4-1 had the same omission. Two read instructions in AGENTS.md referenced `phase-3-design-decisions.md` without `docs/`. Stage 2-1 used `&` instead of `+` in the persona name (inconsistent with AGENTS.md table).

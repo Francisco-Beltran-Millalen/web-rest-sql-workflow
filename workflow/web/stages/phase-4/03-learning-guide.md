@@ -271,6 +271,6 @@ Same persistence document as Stage 4-2.
 
 ## What Comes Next
 
-Same as Stage 4-2 — the prototype is complete.
+The prototype is complete — and you understand every line of it.
 
-The difference: you understand every line of it.
+Proceed to **Stage 4-4: Refactor** to improve the architecture before deployment.

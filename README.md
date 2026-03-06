@@ -1,4 +1,4 @@
-# SPA REST SQL Workflow
+# Web Workflow (SPA + REST + SQL)
 
 A structured, AI-collaborative workflow for building web application prototypes — from raw idea to working code, one stage at a time.
 
@@ -57,7 +57,7 @@ Every workflow improvement is documented. The system gets better over time and t
 
 The workflow produces a **working prototype** — not production code. The goal is to validate the design by building something real. Speed and correctness are in tension; this workflow resolves it by choosing speed first.
 
-A separate "Correctness Workflow" (not included here) takes the prototype to production quality. The prototype is the input to that workflow.
+Phase 5 deploys the prototype. A separate "Correctness Workflow" (not included here) takes it to production quality.
 
 This separation matters because prototyping decisions (SQLite instead of Postgres, no caching, no deployment config) are different from production decisions. Mixing them slows the prototype phase without improving the design.
 
@@ -78,9 +78,9 @@ Adding support for a new LLM tool requires:
 
 ---
 
-## This Workflow: spa-rest-sql
+## This Workflow: Web (SPA + REST + SQL)
 
-The `spa-rest-sql` workflow is a specialization for building web applications with:
+The `web` workflow is a specialization for building web applications with:
 - A **SPA frontend** (single-page application — React, Vue, Svelte, etc.)
 - A **REST API** (JSON over HTTP, stateless)
 - **JWT authentication** (Bearer token — no server-side sessions)
@@ -89,24 +89,28 @@ The `spa-rest-sql` workflow is a specialization for building web applications wi
 
 **Note:** Server-rendered templates and hybrid approaches (HTMX, etc.) are out of scope for this workflow.
 
-### The Four Phases
+### The Five Phases
 
 | Phase | Goal | Stages |
 |-------|------|--------|
-| **Phase 1: Discovery + Tech Selection** | Understand what to build and pick the stack | 6 stages |
+| **Phase 1: Discovery + Tech Selection** | Understand what to build and pick the stack *(generic — applies to any workflow branch)* | 6 stages |
 | **Phase 2: Sketching & Data Modeling** | Design entities, data model, endpoints, and UI sketches | 4 stages |
 | **Phase 3: UI Polish** | Style the plain HTML views into a working interface | 5 stages |
-| **Phase 4: Prototype Implementation** | Build it, use case by use case | 2 stages (one loops) |
+| **Phase 4: Prototype Implementation** | Build it, refactor it | 4 stages (setup + alternating loop + refactor) |
+| **Phase 5: Deployment** | Deploy the prototype to a real environment | 1 stage (skeleton) |
 
 ### On-Demand Stages
 
-Three stages run outside the phase cycle, whenever needed:
+Six stages run outside the phase cycle, whenever needed:
 
 | Stage | Purpose |
 |-------|---------|
 | **Stage 0** — Meta-Workflow | Fix the workflow itself |
-| **Stage D** — Diagram Assistant | Visualize any artifact as a Mermaid diagram |
-| **Stage I** — Artifact Importer | Bring in an external artifact (Swagger spec, SQL schema, project doc) and adapt it to the workflow's format |
+| **Stage diagram** — Diagram Assistant | Visualize any artifact as a Mermaid diagram |
+| **Stage import** — Artifact Importer | Bring in an external artifact (Swagger spec, SQL schema, project doc) and adapt it to the workflow's format |
+| **Stage knowledge** — Knowledge Tester | Pre-meeting quiz on all decisions made so far |
+| **Stage teacher** — Teacher | Socratic learning sessions and rubber duck debugging |
+| **Stage git** — Git Assistant | Version control operations |
 
 ### What It Produces
 
@@ -192,7 +196,7 @@ project-root/
 │   ├── adrs/                    ← Architecture Decision Records
 │   └── *.md                     ← Working design artifacts (project-brief.md, use-cases.md, etc.)
 └── workflow/
-    ├── spa-rest-sql/            ← The active workflow
+    ├── web/                     ← The active workflow (SPA + REST + SQL)
     │   └── stages/              ← Stage files (one per stage, organized by phase)
     ├── templates/               ← Output templates
     └── scripts/                 ← Automation scripts (log export, auto-export)
@@ -206,17 +210,17 @@ project-root/
 |---------|-------------|
 | `/start-stage 1-1` | Start a specific stage (Phase 1, Stage 1) |
 | `/start-stage 0` | Start the Meta-Workflow (fix workflow issues) |
-| `/start-stage d` | Start the Diagram Assistant |
-| `/start-stage i` | Start the Artifact Importer |
+| `/start-stage diagram` | Start the Diagram Assistant |
+| `/start-stage import` | Start the Artifact Importer |
 | `/export-log 1-1` | Export the current session log for Stage 1-1 |
 
 ---
 
 ## Building Your Own Workflow
 
-The `spa-rest-sql` specialization lives in `workflow/spa-rest-sql/`. The philosophy it runs on is generic.
+The `web` specialization lives in `workflow/web/`. The philosophy it runs on is generic.
 
-If you wanted to build a `cli-tool` workflow or a `data-pipeline` workflow, the structure would be the same:
+If you wanted to build a `game` workflow or a `cli` workflow, the structure would be the same:
 
 1. **Define your phases** — what are the natural checkpoints from idea to working prototype?
 2. **Define stages within each phase** — what is the goal, the persona, the inputs, the outputs?
@@ -231,7 +235,7 @@ The core ideas that transfer to any workflow:
 - Personas prevent scope creep
 - Stage 0 makes the workflow self-correcting
 
-The `spa-rest-sql` specialization is one application of these ideas. Build the next one on the same foundation.
+The `web` specialization is one application of these ideas. Build the next one on the same foundation.
 
 ---
 

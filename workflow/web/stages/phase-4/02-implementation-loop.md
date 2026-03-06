@@ -321,10 +321,7 @@ Complete record of:
 
 ## What Comes Next
 
-The prototype is complete. It works, has tests, but may not have:
-- Production-grade architecture (proper error handling, logging, security hardening)
-- Performance optimization
-- Deployment configuration
-- Complete edge case coverage
+The prototype is complete. It works and has tests. Proceed to:
 
-These concerns are addressed in the **Correctness Workflow** (separate workflow, future).
+- **Stage 4-4: Refactor** — improve the architecture before deployment (error handling, validation, security basics, layer enforcement)
+- **Stage 4-3: Learning Guide** — if the user wants to write any remaining use cases themselves before refactoring

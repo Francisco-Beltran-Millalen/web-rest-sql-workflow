@@ -1,4 +1,4 @@
-# Stage D: Diagram Assistant
+# Stage diagram: Diagram Assistant
 
 ## Persona: Visual Communicator
 
@@ -12,7 +12,7 @@ You don't just draw — you recommend the best way to see the information.
 
 Invoke with:
 ```
-/start-stage d
+/start-stage diagram
 ```
 
 ## Interaction Style: Ask → Recommend → Draw
@@ -172,7 +172,7 @@ Diagram files in `docs/assets/diagrams/`:
 - [ ] Diagram type was recommended with rationale
 - [ ] Diagram is generated and saved
 - [ ] User confirms the diagram is useful
-- [ ] Session log exported via `/export-log d`
+- [ ] Session log exported via `/export-log diagram`
 
 ## Tips
 
